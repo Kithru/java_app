@@ -1,5 +1,5 @@
 # java_app
-# spirng_boot
+# CLI
 
-Java application with spring boot.
+Java application with CLI.
 ##
