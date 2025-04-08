@@ -35,7 +35,7 @@ class coursework {
         }
 
         if (login.equals("success")) {
-            System.out.println("////////////////////////////// MAIN MENU //////////////////////////////////////");
+            System.out.println("///////////////////////////////// MAIN MENU //////////////////////////////////////");
             System.out.println();
             System.out.println("        1. Manage Books");
             System.out.println("        2. Manage Members");
@@ -47,23 +47,46 @@ class coursework {
             System.out.print("        Please Enter Number for continue : ");
             int menuid = input.nextInt();
             input.nextLine(); 
-            clearConsole();
 
-            if (menuid == 1) {
-                System.out.println("Manage Books");
-            } else if (menuid == 2) {
-                System.out.println("Manage Members");
-            } else if (menuid == 3) {
-                System.out.println("Issue Books");
-            } else if (menuid == 4) {
-                System.out.println("Return Books");
-            } else if (menuid == 5) {
-                System.out.println("View Reports");
-            } else if (menuid == 6) {
-                System.out.println("Logout");
-            }
+            switch (menuid)
+                {
+                    case (1):   
+                        clearConsole();
+                        System.out.println("//////////  Manage Books  //////////"); 
+                        System.out.println();
+                        System.out.println("        1. Add Book");
+                        System.out.println("        2. Update Book");
+                        System.out.println("        3. Delete Book");
+                        System.out.println("        4. Search Books");
+                        System.out.println("        5. View All Books");
+                        System.out.println();
+                        System.out.print("        Please Enter Number for continue : ");
+                        int bookMenuId = input.nextInt();
+
+                        // break;  
+                    case (2):    
+                        clearConsole();
+                        System.out.println("Manage Members");  
+                        break;  
+                    case (3):  
+                        clearConsole();  
+                        System.out.println("Issue Books");  
+                        break;  
+                    case (4):  
+                        clearConsole();  
+                        System.out.println("Return Books");  
+                        break;  
+                    case (5):   
+                        clearConsole(); 
+                        System.out.println("View Reports"); 
+                        break; 
+                    case (6):  
+                        clearConsole();  
+                        System.out.println("Logout"); 
+                        default:    
+                        break;  
+                }
         }
-        
 
     }
 
