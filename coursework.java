@@ -107,24 +107,16 @@ class coursework {
                                 bookmenu = 1;
                                 break;
                             case 2:
-                                clearConsole();
-                                System.out.println("Update Books");
                                 bookmenu = 2; 
                                 break;
                             case 3:
-                                clearConsole();
                                 bookmenu = 3;
-                                System.out.println("Delete Books");
                                 break;
                             case 4:
-                                clearConsole();
                                 bookmenu = 4;
-                                System.out.println("Search Books");
                                 break;
                             case 5:
-                                clearConsole();
                                 bookmenu = 5;
-                                System.out.println("View All Books");
                                 break;
                             case 6:
                                 clearConsole();
@@ -140,20 +132,20 @@ class coursework {
                             break; 
                         } else if (bookmenu == 2) {
                             clearConsole();
-                            input.nextLine(); 
-                            // continue;
+                            System.out.println("Update Books");
+                            break; 
                         } else if (bookmenu == 3) {
                             clearConsole();
-                            input.nextLine(); 
-                            // continue;
+                            System.out.println("Delete Books");
+                            break; 
                         } else if (bookmenu == 4) {
                             clearConsole();
-                            input.nextLine(); 
-                            // continue;
+                            System.out.println("Search Books");
+                            break; 
                         } else if (bookmenu == 5) {
                             clearConsole();
-                            input.nextLine(); 
-                            // continue;
+                            System.out.println("View All Books");
+                            break; 
                         } else if (bookmenu == 6) {
                             clearConsole();
                             input.nextLine(); 
