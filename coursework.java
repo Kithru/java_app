@@ -148,8 +148,8 @@ class coursework {
                             break; 
                         } else if (bookmenu == 4) {
                             clearConsole();
-                            input.nextLine(); 
-                            // continue;
+                            System.out.println("Search Books");
+                            break; 
                         } else if (bookmenu == 5) {
                             clearConsole();
                             input.nextLine(); 
