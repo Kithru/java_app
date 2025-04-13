@@ -140,12 +140,12 @@ class coursework {
                             break; 
                         } else if (bookmenu == 2) {
                             clearConsole();
-                            System.out.println("Update Book");
+                            System.out.println("Update Books");
                             break; 
                         } else if (bookmenu == 3) {
                             clearConsole();
-                            input.nextLine(); 
-                            // continue;
+                            System.out.println("Delete Books");
+                            break; 
                         } else if (bookmenu == 4) {
                             clearConsole();
                             input.nextLine(); 
