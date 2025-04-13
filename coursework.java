@@ -110,9 +110,7 @@ class coursework {
                                 bookmenu = 2; 
                                 break;
                             case 3:
-                                clearConsole();
                                 bookmenu = 3;
-                                System.out.println("Delete Books");
                                 break;
                             case 4:
                                 clearConsole();
