@@ -152,8 +152,8 @@ class coursework {
                             break; 
                         } else if (bookmenu == 5) {
                             clearConsole();
-                            input.nextLine(); 
-                            // continue;
+                            System.out.println("View All Books");
+                            break; 
                         } else if (bookmenu == 6) {
                             clearConsole();
                             input.nextLine(); 
