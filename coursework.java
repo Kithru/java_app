@@ -104,8 +104,6 @@ class coursework {
 
                         switch (bookMenuId) {
                             case 1: 
-                                clearConsole();
-                                System.out.println("Add Books");
                                 bookmenu = 1;
                                 break;
                             case 2:
@@ -131,15 +129,37 @@ class coursework {
                             case 6:
                                 clearConsole();
                                 bookmenu = 6;
-                                break;
+                                // break;
                             default:
                                 System.out.println("Invalid option. Please try again.");
                                 break;      
                         }
-                        if (bookmenu == 6) {
+                        if (bookmenu == 1) {
+                            clearConsole();
+                            System.out.println("Add Books");
+                            break; 
+                        } else if (bookmenu == 2) {
                             clearConsole();
                             input.nextLine(); 
                             // continue;
+                        } else if (bookmenu == 3) {
+                            clearConsole();
+                            input.nextLine(); 
+                            // continue;
+                        } else if (bookmenu == 4) {
+                            clearConsole();
+                            input.nextLine(); 
+                            // continue;
+                        } else if (bookmenu == 5) {
+                            clearConsole();
+                            input.nextLine(); 
+                            // continue;
+                        } else if (bookmenu == 6) {
+                            clearConsole();
+                            input.nextLine(); 
+                            // continue;
+                        } else {
+
                         }
                 } else if (menu == 2) {
                     clearConsole();
@@ -151,6 +171,7 @@ class coursework {
                     input.nextLine(); 
                 } else if (menu == 4) {
                     clearConsole();            
+                    System.out.println("ABCD");
                     System.out.println("Manage Members");
                     input.nextLine(); 
                 } else if (menu == 5) {
