@@ -140,8 +140,8 @@ class coursework {
                             break; 
                         } else if (bookmenu == 2) {
                             clearConsole();
-                            input.nextLine(); 
-                            // continue;
+                            System.out.println("Update Book");
+                            break; 
                         } else if (bookmenu == 3) {
                             clearConsole();
                             input.nextLine(); 
