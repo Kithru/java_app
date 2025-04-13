@@ -113,9 +113,7 @@ class coursework {
                                 bookmenu = 3;
                                 break;
                             case 4:
-                                clearConsole();
                                 bookmenu = 4;
-                                System.out.println("Search Books");
                                 break;
                             case 5:
                                 clearConsole();
