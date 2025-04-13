@@ -5,66 +5,166 @@ class coursework {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        String login;
-
-        while (true) {
-            System.out.println();
-            System.out.println("////////////////////////////// SYSTEM LOGIN //////////////////////////////////////");
-            System.out.println();
-            System.out.print("     Please enter Username : ");
-            String username = input.nextLine();
-            System.out.println();
-            System.out.print("     Please enter Password : ");
-            String password = input.nextLine();
-            clearConsole();
-
-            if ((username.equals("Test")) && (password.equals("1234"))) {
-                System.out.println();
-                System.out.println("              Successfully Logged in; Press Enter to continue.");
-                System.out.println();
-                login = "success";
-                input.nextLine(); 
-                clearConsole(); 
-                break;
-
-            } else {
-                System.out.println();
-                System.out.println("                        Invalid User Credentials.");
-                System.out.println();
-            }
-        }
-
-        if (login.equals("success")) {
-            System.out.println("////////////////////////////// MAIN MENU //////////////////////////////////////");
-            System.out.println();
-            System.out.println("        1. Manage Books");
-            System.out.println("        2. Manage Members");
-            System.out.println("        3. Issue Books");
-            System.out.println("        4. Return Books");
-            System.out.println("        5. View Reports");
-            System.out.println("        6. Logout");
-            System.out.println();
-            System.out.print("        Please Enter Number for continue : ");
-            int menuid = input.nextInt();
-            input.nextLine(); 
-            clearConsole();
-
-            if (menuid == 1) {
-                System.out.println("Manage Books");
-            } else if (menuid == 2) {
-                System.out.println("Manage Members");
-            } else if (menuid == 3) {
-                System.out.println("Issue Books");
-            } else if (menuid == 4) {
-                System.out.println("Return Books");
-            } else if (menuid == 5) {
-                System.out.println("View Reports");
-            } else if (menuid == 6) {
-                System.out.println("Logout");
-            }
-        }
         
+        while (true) { 
+            String login;
+            while (true) {
+                System.out.println();
+                System.out.println("////////////////////////////// SYSTEM LOGIN //////////////////////////////////////");
+                System.out.println();
+                System.out.print("     Please enter Username : ");
+                String username = input.nextLine();
+                System.out.println();
+                System.out.print("     Please enter Password : ");
+                String password = input.nextLine();
+                clearConsole();
 
+                if ((username.equals("Test")) && (password.equals("1234"))) {
+                    System.out.println();
+                    System.out.println("              Successfully Logged in; Press Enter to continue.");
+                    System.out.println();
+                    login = "success";
+                    input.nextLine(); 
+                    clearConsole(); 
+                    break;
+
+                } else {
+                    System.out.println();
+                    System.out.println("                        Invalid User Credentials.");
+                    System.out.println();
+                }
+            }
+
+            if (login.equals("success")) {
+                System.out.println("///////////////////////////////// MAIN MENU //////////////////////////////////////");
+                System.out.println();
+                System.out.println("        1. Manage Books");
+                System.out.println("        2. Manage Members");
+                System.out.println("        3. Issue Books");
+                System.out.println("        4. Return Books");
+                System.out.println("        5. View Reports");
+                System.out.println("        6. Logout");
+                System.out.println();
+                System.out.print("        Please Enter Number to continue: ");
+                
+                int menuid = input.nextInt();
+                input.nextLine(); 
+            
+                int menu = -1; 
+            
+                switch (menuid) {
+                    case 1:
+                        clearConsole();
+                        menu = 1;
+                        break;
+                    case 2:
+                        clearConsole();
+                        menu = 2; 
+                        break;
+                    case 3:
+                        clearConsole();
+                        menu = 3;
+                        System.out.println("Issue Books");
+                        break;
+                    case 4:
+                        clearConsole();
+                        menu = 4;
+                        System.out.println("Return Books");
+                        break;
+                    case 5:
+                        clearConsole();
+                        menu = 5;
+                        System.out.println("View Reports");
+                        break;
+                    case 6:
+                        clearConsole();
+                        menu = 6;
+                        break;
+                    default:
+                        System.out.println("Invalid option. Please try again.");
+                        break;
+                }
+            
+                if (menu == 1) {
+                        clearConsole();
+                        System.out.println("//////////  Manage Books  //////////");
+                        System.out.println();
+                        System.out.println("        1. Add Book");
+                        System.out.println("        2. Update Book");
+                        System.out.println("        3. Delete Book");
+                        System.out.println("        4. Search Books");
+                        System.out.println("        5. View All Books");
+                        System.out.println("        6. Return to The Menu");
+                        System.out.println();
+                        System.out.print("        Please Enter Number to continue: ");
+                        
+                        int bookMenuId = input.nextInt();
+                        input.nextLine(); 
+                        int bookmenu = -1; 
+
+                        switch (bookMenuId) {
+                            case 1: 
+                                clearConsole();
+                                System.out.println("Add Books");
+                                bookmenu = 1;
+                                break;
+                            case 2:
+                                clearConsole();
+                                System.out.println("Update Books");
+                                bookmenu = 2; 
+                                break;
+                            case 3:
+                                clearConsole();
+                                bookmenu = 3;
+                                System.out.println("Delete Books");
+                                break;
+                            case 4:
+                                clearConsole();
+                                bookmenu = 4;
+                                System.out.println("Search Books");
+                                break;
+                            case 5:
+                                clearConsole();
+                                bookmenu = 5;
+                                System.out.println("View All Books");
+                                break;
+                            case 6:
+                                clearConsole();
+                                bookmenu = 6;
+                                break;
+                            default:
+                                System.out.println("Invalid option. Please try again.");
+                                break;      
+                        }
+                        if (bookmenu == 6) {
+                            clearConsole();
+                            input.nextLine(); 
+                            // continue;
+                        }
+                } else if (menu == 2) {
+                    clearConsole();
+                    System.out.println("Manage Members");
+                    input.nextLine(); 
+                } else if (menu == 3) {
+                    clearConsole();
+                    System.out.println("Manage Members");
+                    input.nextLine(); 
+                } else if (menu == 4) {
+                    clearConsole();            
+                    System.out.println("Manage Members");
+                    input.nextLine(); 
+                } else if (menu == 5) {
+                    clearConsole();
+                    System.out.println("Manage Members");
+                    input.nextLine(); 
+                } else if (menu == 6) {
+                    clearConsole();
+                    // input.nextLine(); 
+                } else {
+
+                }
+            }  
+        }    
     }
 
     private final static void clearConsole() {
