@@ -107,8 +107,6 @@ class coursework {
                                 bookmenu = 1;
                                 break;
                             case 2:
-                                clearConsole();
-                                System.out.println("Update Books");
                                 bookmenu = 2; 
                                 break;
                             case 3:
