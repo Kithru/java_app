@@ -116,9 +116,7 @@ class coursework {
                                 bookmenu = 4;
                                 break;
                             case 5:
-                                clearConsole();
                                 bookmenu = 5;
-                                System.out.println("View All Books");
                                 break;
                             case 6:
                                 clearConsole();
