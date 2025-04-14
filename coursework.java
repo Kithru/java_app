@@ -9,6 +9,7 @@ class coursework {
         while (true) { 
             String login;
             while (true) {
+                clearConsole(); 
                 System.out.println();
                 System.out.println("////////////////////////////// SYSTEM LOGIN //////////////////////////////////////");
                 System.out.println();
@@ -29,9 +30,13 @@ class coursework {
                     break;
 
                 } else {
+                    clearConsole(); 
                     System.out.println();
                     System.out.println("                        Invalid User Credentials.");
                     System.out.println();
+                    System.out.println("                        Press Enter to continue.");
+                    System.out.println();
+                    input.nextLine(); 
                 }
             }
 
@@ -87,7 +92,7 @@ class coursework {
             
                 if (menu == 1) {
                         clearConsole();
-                        System.out.println("//////////  Manage Books  //////////");
+                        System.out.println("///////////////////////////////// Manage Books //////////////////////////////////////");
                         System.out.println();
                         System.out.println("        1. Add Book");
                         System.out.println("        2. Update Book");
@@ -153,6 +158,7 @@ class coursework {
                         } else {
 
                         }
+                        
                 } else if (menu == 2) {
                     clearConsole();
                     System.out.println("Manage Members");
