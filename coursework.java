@@ -27,6 +27,7 @@ class coursework {
                     System.out.println("              Successfully Logged in; Press Enter to continue.");
                     System.out.println();
                     mainmenu = true; 
+                    islogin = false; 
                     login = "success";
                     input.nextLine(); 
                     clearConsole(); 
@@ -40,6 +41,7 @@ class coursework {
                     System.out.println("                        Press Enter to continue.");
                     System.out.println();
                     input.nextLine(); 
+                    islogin = true; 
                 }
             }
             
@@ -158,11 +160,7 @@ class coursework {
                                 clearConsole();
                                 System.out.println("View All Books");
                                 break; 
-                            } else if (bookmenu == 6) {
-                                clearConsole();
-                                input.nextLine(); 
-                                // continue;
-                            } else {
+                            }  else {
 
                             }
                             
