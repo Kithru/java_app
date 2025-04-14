@@ -1,4 +1,7 @@
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 class coursework {
@@ -142,8 +145,48 @@ class coursework {
                             }
                             if (bookmenu == 1) {
                                 clearConsole();
-                                System.out.println("Add Books");
-                                break; 
+                                List<String[]> books = new ArrayList<>();
+                                int bookCount = 0;
+                                char choice;
+
+                                do {
+                                    int bookId = 1 + bookCount;
+
+                                    System.out.println("///////////////////////////////// Add Book //////////////////////////////////////");
+                                    System.out.println();
+                                    System.out.print("     Please enter Name of the Book : ");
+                                    String bookName = input.nextLine();
+                                    System.out.println();
+                                    System.out.print("     Please enter Author's Name : ");
+                                    String bookAuthor = input.nextLine();
+                                    System.out.println();
+                                    System.out.print("     Please enter Genre of the Book : ");
+                                    String bookGenre = input.nextLine();
+                                    System.out.println();
+                                    System.out.print("     Please enter Quantity : ");
+                                    String bookQuantity = input.nextLine();
+
+                                    books.add(new String[] {
+                                        String.valueOf(bookId), bookName, bookAuthor, bookGenre, bookQuantity
+                                    });
+
+                                    System.out.println("\n           Book Added Successfully.");
+                                    System.out.println();
+
+                                    // view book array
+                                    System.out.println("Full Book List (for Testing):");
+                                    for (String[] book : books) {
+                                        System.out.println(Arrays.toString(book));
+                                    }
+
+                                    bookCount++;
+
+                                    System.out.print("\nDo you want to add another book? (Y/N): ");
+                                    choice = input.nextLine().toUpperCase().charAt(0);
+
+                                } while (choice == 'Y');
+
+                                input.close();
                             } else if (bookmenu == 2) {
                                 clearConsole();
                                 System.out.println("Update Books");
