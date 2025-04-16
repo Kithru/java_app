@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +10,10 @@ class coursework {
         boolean islogin = true;
         boolean mainMenu = true; 
         boolean bookMenu = true;
+        String bookName;  
+        String bookAuthor; 
+        String bookGenre; 
+        int bookQuantity;
         List<String[]> books = new ArrayList<>();
 
         while (islogin) { 
@@ -50,7 +53,7 @@ class coursework {
                 }
             }
             
-            while (mainMenu) {
+            while (mainMenu) { 
                 
                 if (login.equals("success")) {
                     System.out.println("///////////////////////////////// MAIN MENU //////////////////////////////////////");
@@ -94,35 +97,38 @@ class coursework {
                                         System.out.println("///////////////////////////////// Add Book //////////////////////////////////////");
                                         System.out.println();
                                         System.out.print("     Please enter Name of the Book : ");
-                                        String bookName = input.nextLine();
+                                        bookName = input.nextLine();
                                         System.out.println();
                                         System.out.print("     Please enter Author's Name : ");
-                                        String bookAuthor = input.nextLine();
+                                        bookAuthor = input.nextLine();
                                         System.out.println();
                                         System.out.print("     Please enter Genre of the Book : ");
-                                        String bookGenre = input.nextLine();
+                                        bookGenre = input.nextLine();
                                         System.out.println();
                                         System.out.print("     Please enter Quantity : ");
-                                        String bookQuantity = input.nextLine();
+                                        bookQuantity = input.nextInt();
 
                                         boolean isDuplicate = false;
                                         for (String[] book : books) {
-                                            if (book[1].equalsIgnoreCase(bookName)
-                                                && book[2].equalsIgnoreCase(bookAuthor)
-                                                && book[3].equalsIgnoreCase(bookGenre)
-                                                && book[4].equals(bookQuantity)) {
+                                            if (book[1].equalsIgnoreCase(bookName) )
+                                                // || book[2].equalsIgnoreCase(bookAuthor)
+                                                // || book[3].equalsIgnoreCase(bookGenre)
+                                                // || book[4].equals(bookQuantity)) 
+                                                {
                                                 isDuplicate = true;
                                                 break;
                                             }
                                         }
                                         if (isDuplicate) {
+                                            System.out.println();
                                             System.out.println("\n    This book already exists in the system. Duplicate not added.");
+                                            System.out.println();
                                         } else {
 
                                             books.add(new String[] {
-                                                String.valueOf(bookId), bookName, bookAuthor, bookGenre, bookQuantity
+                                                String.valueOf(bookId), bookName, bookAuthor, bookGenre, Integer.toString(bookQuantity)
                                             });
-
+                                            System.out.println();
                                             System.out.println("\n           Book Added Successfully.");
                                             System.out.println();
 
@@ -140,15 +146,59 @@ class coursework {
                                     // input.close();
                                 } else if (bookMenuId == 2) {
                                     
+                                    for (String[] book : books) {
+                                        System.out.println(Arrays.toString(book));
+                                    }
                                     if (!books.isEmpty()) {
-                                        System.out.println("Books are available for update.");
+                                        System.out.println("///////////////////////////////// Update Book //////////////////////////////////////");
+                                        System.out.println();
+                                        System.out.print("     Please enter Name of the Book to update: ");
+                                        String bookNameToUpdate = input.nextLine();
+                                        System.out.println();
+
+                                        boolean found = false;
+
+                                        for (int i = 0; i < books.size(); i++) {
+                                            String[] book = books.get(i);
+
+                                            if (book[1].equalsIgnoreCase(bookNameToUpdate)) {
+                                                System.out.print("     Please enter new Author's Name: ");
+                                                bookAuthor = input.nextLine();
+                                                System.out.println();
+
+                                                System.out.print("     Please enter new Genre of the Book: ");
+                                                bookGenre = input.nextLine();
+                                                System.out.println();
+
+                                                System.out.print("     Please enter new Quantity: ");
+                                                bookQuantity = input.nextInt();
+                                                input.nextLine(); 
+                                                System.out.println();
+
+                                                book[2] = bookAuthor;
+                                                book[3] = bookGenre;
+                                                book[4] = String.valueOf(bookQuantity);
+
+                                                books.set(i, book); 
+                                                System.out.println("      Book updated successfully!");
+                                                found = true;
+                                                break;
+                                            }
+                                        }
+                                        if (!found) {
+                                            System.out.println("      Book not found in the list.");
+                                        }
+
                                     } else {
                                         System.out.println("No books found to update.");
+                                        input.nextLine();
                                     }
+                                   
                                     System.out.println("Update Books");
+                                    input.nextLine();
 
-                                    clearConsole();
-                                    System.out.println("Update Books");
+                                    // clearConsole();
+                                    // System.out.println("Update Books");
                                 } else if (bookMenuId == 3) {
                                     clearConsole();
                                     System.out.println("Delete Books");
