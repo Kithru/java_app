@@ -13,7 +13,7 @@ class coursework {
         String bookName;  
         String bookAuthor; 
         String bookGenre; 
-        int bookQuantity;
+        String bookQuantity;
         List<String[]> books = new ArrayList<>();
 
         while (islogin) { 
@@ -106,7 +106,7 @@ class coursework {
                                         bookGenre = input.nextLine();
                                         System.out.println();
                                         System.out.print("     Please enter Quantity : ");
-                                        bookQuantity = input.nextInt();
+                                        bookQuantity = input.nextLine();
 
                                         boolean isDuplicate = false;
                                         for (String[] book : books) {
@@ -126,7 +126,7 @@ class coursework {
                                         } else {
 
                                             books.add(new String[] {
-                                                String.valueOf(bookId), bookName, bookAuthor, bookGenre, Integer.toString(bookQuantity)
+                                                String.valueOf(bookId), bookName, bookAuthor, bookGenre, bookQuantity
                                             });
                                             System.out.println();
                                             System.out.println("\n           Book Added Successfully.");
@@ -141,7 +141,7 @@ class coursework {
                                         System.out.print("\nDo you want to add another book? (Y/N): ");
                                         choice = input.nextLine().toUpperCase().charAt(0);
                                     
-                                    } while (choice == 'Y' ) ;
+                                    } while (choice == 'Y' );
 
                                     // input.close();
                                 } else if (bookMenuId == 2) {
@@ -171,7 +171,7 @@ class coursework {
                                                 System.out.println();
 
                                                 System.out.print("     Please enter new Quantity: ");
-                                                bookQuantity = input.nextInt();
+                                                bookQuantity = input.nextLine();
                                                 input.nextLine(); 
                                                 System.out.println();
 
@@ -180,7 +180,12 @@ class coursework {
                                                 book[4] = String.valueOf(bookQuantity);
 
                                                 books.set(i, book); 
-                                                System.out.println("      Book updated successfully!");
+                                                System.out.println();
+                                                System.out.println("            Book updated successfully!");
+                                                System.out.println();
+                                                System.out.println("            Press Enter to continue.");
+                                                System.out.println();
+                                                input.nextLine(); 
                                                 found = true;
                                                 break;
                                             }
@@ -193,9 +198,7 @@ class coursework {
                                         System.out.println("No books found to update.");
                                         input.nextLine();
                                     }
-                                   
-                                    System.out.println("Update Books");
-                                    input.nextLine();
+                                    
 
                                     // clearConsole();
                                     // System.out.println("Update Books");
