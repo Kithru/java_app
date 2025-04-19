@@ -93,7 +93,7 @@ class coursework {
 
                                     do {
                                         int bookId = 1 + bookCount;
-
+                                        clearConsole();
                                         System.out.println("///////////////////////////////// Add Book //////////////////////////////////////");
                                         System.out.println();
                                         System.out.print("     Please enter Title of the Book : ");
@@ -210,87 +210,127 @@ class coursework {
                                         } else {
                                             System.out.println("No books found to update.");
                                             input.nextLine();
-                                            break; // Exit if list is empty
+                                            break; 
                                         }
                                     
                                     } while (choiceupdate == 'Y');
 
                                 } else if (bookMenuId == 3) {
-                                    for (String[] book : books) {
-                                        System.out.println(Arrays.toString(book));
-                                    }
-                                    if (!books.isEmpty()) {
-                                        clearConsole();
-                                        System.out.println("///////////////////////////////// Delete Book //////////////////////////////////////");
-                                        System.out.println();
-                                        System.out.print("     Please enter ID of the Book to Delete: ");
-                                        String bookIdToDelete = input.nextLine();  
-                                        System.out.println();
-                                    
-                                        boolean found = false;
-                                    
-                                        for (int i = 0; i < books.size(); i++) {
-                                            String[] book = books.get(i);
+                                    char choicedelete;
+                                    do {
+                                        if (!books.isEmpty()) {
+                                            clearConsole();
+                                            System.out.println("///////////////////////////////// Delete Book //////////////////////////////////////");
+                                            System.out.println();
+                                            System.out.print("     Please enter ID of the Book to Delete: ");
+                                            String bookIdToDelete = input.nextLine();  
+                                            System.out.println();
 
-                                            if (book[0].equalsIgnoreCase(bookIdToDelete)) {
-                                                books.remove(i);
-                                                found = true;
-                                                System.out.println("      Book \"" + bookIdToDelete + "\" has been deleted successfully.");
-                                                break; 
+                                            boolean found = false;
+
+                                            for (int i = 0; i < books.size(); i++) {
+                                                String[] book = books.get(i);
+
+                                                if (book[0].equalsIgnoreCase(bookIdToDelete)) {
+                                                    books.remove(i);
+                                                    found = true;
+                                                    System.out.println("      Book \"" + bookIdToDelete + "\" has been deleted successfully.");
+                                                    break;
+                                                }
                                             }
+
+                                            if (!found) {
+                                                System.out.println("      Book not found in the list to Delete.");
+                                            }
+
+                                            System.out.print("\nDo you want to delete another book? (Y/N): ");
+                                            choicedelete = input.nextLine().toUpperCase().charAt(0);
+                                            System.out.println();
+
+                                        } else {
+                                            System.out.println("No books found to Delete.");
+                                            input.nextLine();
+                                            break; 
                                         }
-                                    
-                                        if (!found) {
-                                            System.out.println("      Book not found in the list to Delete.");
-                                        }
-                                    
-                                    } else {
-                                        System.out.println("No books found to Delete.");
-                                        input.nextLine();
-                                    }
+                                    } while (choicedelete == 'Y');
+
                                 } else if (bookMenuId == 4) {
+                                    char choicesearch;
+
+                                    do {
+                                        if (!books.isEmpty()) {
+                                            clearConsole();
+                                            System.out.println("///////////////////////////////// Search Book //////////////////////////////////////");
+                                            System.out.println();
+                                            System.out.print("      Please enter Book ID for Search: ");
+                                            String bookIdToSearch = input.nextLine();  
+                                            System.out.println();
+
+                                            boolean found = false;
+
+                                            for (int i = 0; i < books.size(); i++) {
+                                                String[] book = books.get(i);
+
+                                                // Assuming book[0] = ID, book[1] = Name, book[2] = Author, book[3] = Publisher, book[4] = Quantity
+                                                if (book[0].equalsIgnoreCase(bookIdToSearch)) {
+                                                    found = true;
+                                                    System.out.println("      Book Found.");
+                                                    System.out.println();
+                                                    System.out.println("      ID        : " + book[0]);
+                                                    System.out.println("      Name      : " + book[1]);
+                                                    System.out.println("      Author    : " + book[2]); 
+                                                    System.out.println("      Publisher : " + book[3]); 
+                                                    System.out.println("      Quantity  : " + book[4]); 
+                                                    break;
+                                                }
+                                            }
+
+                                            if (!found) {
+                                                System.out.println("      Book not found in the list.");
+                                            }
+
+                                            System.out.print("\nDo you want to search another book? (Y/N): ");
+                                            choicesearch = input.nextLine().toUpperCase().charAt(0);
+                                            System.out.println();
+
+                                        } else {
+                                            System.out.println("No books found.");
+                                            input.nextLine();
+                                            break;
+                                        }
+                                    } while (choicesearch == 'Y');
+                                } else if (bookMenuId == 5) {
+                                    clearConsole();
                                     if (!books.isEmpty()) {
                                         clearConsole();
-                                        System.out.println("///////////////////////////////// Search Book //////////////////////////////////////");
+                                        System.out.println("//////////////////////////////////// View All Books /////////////////////////////////////////");
                                         System.out.println();
-                                        System.out.print("      Please enter Book ID for Search: ");
-                                        String bookIdToSearch = input.nextLine();  
                                         System.out.println();
-                                    
-                                        boolean found = false;
-                                    
+                                        System.out.printf("%-5s %-10s %-25s %-20s %-20s %-10s\n", "No.", "ID", "Name", "Author", "Publisher", "Quantity");
+                                        System.out.println("----------------------------------------------------------------------------------------------");
+                                        
                                         for (int i = 0; i < books.size(); i++) {
                                             String[] book = books.get(i);
-                                    
-                                            if (book[0].equalsIgnoreCase(bookIdToSearch)) {
-                                                found = true;
-                                                System.out.println("      Book Found.");
-                                                System.out.println();
-                                                System.out.println("      Name      : " + book[0]);
-                                                System.out.println("      ID        : " + book[1]);
-                                                System.out.println("      Author    : " + book[2]); 
-                                                System.out.println("      Publisher : " + book[3]); 
-                                                System.out.println("      Quantity  : " + book[4]); 
-                                                input.nextLine();
-                                                break;
-                                            }
+                                            
+                                            System.out.printf("%-5d %-10s %-25s %-20s %-20s %-10s\n", 
+                                                (i + 1), book[0], book[1], book[2], book[3], book[4]);
                                         }
-                                    
-                                        if (!found) {
-                                            System.out.println("      Book not found in the list.");
-                                        }
-                                    
+                                        
+                                        System.out.println("----------------------------------------------------------------------------------------------");
+                                        System.out.println();
+                                        System.out.println("      Total Books: " + books.size());
+                                        System.out.println();
+                                        System.out.println("\nPress Enter to continue...");
+                                        input.nextLine();
+                                        break;
                                     } else {
                                         System.out.println("No books found.");
                                         input.nextLine();
                                     }
-                                } else if (bookMenuId == 5) {
-                                    clearConsole();
-                                    System.out.println("View All Books");
                                 } else if (bookMenuId == 6) {
                                     clearConsole();
                                     mainMenu = true;
-                                }  else {
+                                } else {
                                     System.out.println("Invalid option. Please try again.");
                                 }
                         }    
@@ -314,7 +354,7 @@ class coursework {
                         clearConsole();
                         mainMenu = false; 
                         islogin = true; 
-                        input.nextLine(); 
+                        // input.nextLine(); 
                     } else {
                         System.out.println("Invalid option. Please try again.");
                     }
