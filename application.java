@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-class application {
+class coursework {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -11,6 +11,8 @@ class application {
         boolean mainMenu = true; 
         boolean bookMenu = true;
         boolean memberMenu = true;
+        String username01 = "Test";
+        String password01 = "1234";
         String bookName;  
         String bookAuthor; 
         String bookGenre; 
@@ -36,7 +38,7 @@ class application {
                 String password = input.nextLine();
                 clearConsole();
 
-                if ((username.equals("Test")) && (password.equals("1234"))) {
+                if (username.equals(username01) && password.equals(password01)) {
                     System.out.println();
                     System.out.println("              Successfully Logged in; Press Enter to continue.");
                     System.out.println();
@@ -392,16 +394,16 @@ class application {
                                         System.out.println();
                                     } else {
 
-                                        books.add(new String[] {
+                                        members.add(new String[] {
                                             String.valueOf(memberId), memberName, memberContactNumber, memberEmail
                                         });
                                         System.out.println();
-                                        System.out.println("\n           Book Added Successfully.");
+                                        System.out.println("\n           Member Added Successfully.");
                                         System.out.println();
 
                                         System.out.println("Full Book List (for Testing):");
-                                        for (String[] book : books) {
-                                            System.out.println(Arrays.toString(book));
+                                        for (String[] member : members) {
+                                            System.out.println(Arrays.toString(member));
                                         }
                                         memberCount++;
                                     }
