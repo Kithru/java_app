@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-class coursework {
+class application {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -14,6 +14,7 @@ class coursework {
         String username01 = "Test";
         String password01 = "1234";
         int bookCount = 0;
+        int memberCount = 0;
         String bookName;  
         String bookAuthor; 
         String bookGenre; 
@@ -97,7 +98,6 @@ class coursework {
                                 input.nextLine(); 
                                 if (bookMenuId == 1) {
                                     clearConsole();
-                                    // int bookCount = 0;
                                     char choice;
 
                                     do {
@@ -118,12 +118,13 @@ class coursework {
                                         bookQuantity = input.nextLine();
 
                                         boolean isDuplicate = false;
-                                        for (String[] book : books) {
-                                            if (book[1].equalsIgnoreCase(bookName) )
-                                                // || book[2].equalsIgnoreCase(bookAuthor)
-                                                // || book[3].equalsIgnoreCase(bookGenre)
-                                                // || book[4].equals(bookQuantity)) 
-                                                {
+                                        for (int i = 0; i < bookCount; i++) {
+                                            String[] book = books[i];
+                                            if (book[1] != null && book[1].equalsIgnoreCase(bookName) ) {
+                                                // && book[2] != null && book[2].equalsIgnoreCase(bookAuthor)
+                                                // && book[3] != null && book[3].equalsIgnoreCase(bookGenre)
+                                                // && book[4] != null && book[4].equals(bookQuantity)) 
+                                               
                                                 isDuplicate = true;
                                                 break;
                                             }
@@ -362,7 +363,6 @@ class coursework {
                             input.nextLine(); 
                             if (memberMenuId == 1) {
                                 clearConsole();
-                                int memberCount = 0;
                                 char choiceMember;
                                 
                                 do {
@@ -380,25 +380,30 @@ class coursework {
                                     memberEmail = input.nextLine();
 
                                     boolean isDuplicate = false;
-                                    for (String[] member : members) {
-                                        if (member[1].equalsIgnoreCase(memberName) 
-                                            || member[2].equalsIgnoreCase(memberContactNumber)
-                                            || member[3].equalsIgnoreCase(memberEmail) )
-                                            // || book[4].equals(bookQuantity)) 
-                                            {
+                                    for (int i = 0; i < memberCount; i++) {
+                                        String[] member = members[i];
+                                        if (member[1] != null && member[1].equalsIgnoreCase(memberName) 
+                                            && member[2] != null && member[2].equalsIgnoreCase(memberContactNumber)
+                                            && member[3] != null && member[3].equalsIgnoreCase(memberEmail) ) {
+                                            // && book[4] != null && book[4].equals(bookQuantity)) 
+                                           
                                             isDuplicate = true;
                                             break;
                                         }
                                     }
+
+
                                     if (isDuplicate) {
                                         System.out.println();
                                         System.out.println("\n    This book already exists in the system. Duplicate not added.");
                                         System.out.println();
                                     } else {
 
-                                        members.add(new String[] {
-                                            String.valueOf(memberId), memberName, memberContactNumber, memberEmail
-                                        });
+                                        members[memberCount][0] = String.valueOf(memberId);
+                                        members[memberCount][1] = memberName;
+                                        members[memberCount][2] = memberContactNumber;
+                                        members[memberCount][3] = memberEmail;
+
                                         System.out.println();
                                         System.out.println("\n           Member Added Successfully.");
                                         System.out.println();
@@ -424,7 +429,7 @@ class coursework {
                                         System.out.println(Arrays.toString(member));
                                     }
 
-                                    if (!members.isEmpty()) {
+                                    if (memberCount > 0) { 
                                         clearConsole();
                                         System.out.println("///////////////////////////////// Update Member //////////////////////////////////////");
                                         System.out.println();
@@ -435,10 +440,9 @@ class coursework {
 
                                         boolean found = false;
 
-                                        for (int i = 0; i < members.size(); i++) {
-                                            String[] member = members.get(i);
-
-                                            if (member[0].equalsIgnoreCase(memberIdToUpdate)) {
+                                        for (int i = 0; i < memberCount; i++) {
+                                            if (members[i][0].equalsIgnoreCase(memberIdToUpdate)) {
+                                            
                                                 System.out.print("     Please enter new Name of the Member: ");
                                                 memberName = input.nextLine();
                                                 System.out.println();
@@ -452,13 +456,11 @@ class coursework {
                                                 System.out.println();
 
                                                 // Update member details
-                                                member[1] = memberName;
-                                                member[2] = memberContactNumber;
-                                                member[3] = memberEmail;
+                                                members[i][1] = memberName;
+                                                members[i][2] = memberContactNumber;
+                                                members[i][3] = memberEmail;
 
-                                                members.set(i, member);
                                                 found = true;
-
                                                 System.out.println();
                                                 System.out.println("            Member details updated successfully!");
                                                 System.out.println();
@@ -485,7 +487,7 @@ class coursework {
                             } else if (memberMenuId == 3) {
                                 char choiceDeleteMember;
                                 do {
-                                    if (!members.isEmpty()) {
+                                    if (memberCount > 0) {
                                         clearConsole();
                                         System.out.println("///////////////////////////////// Delete Member //////////////////////////////////////");
                                         System.out.println();
@@ -495,11 +497,14 @@ class coursework {
 
                                         boolean foundMember = false;
 
-                                        for (int i = 0; i < members.size(); i++) {
-                                            String[] member = members.get(i);
+                                        for (int i = 0; i < memberCount; i++) {
 
-                                            if (member[0].equalsIgnoreCase(memberIdToDelete)) {
-                                                members.remove(i);
+                                            if (members[i][0].equalsIgnoreCase(memberIdToDelete)) {
+                                                for (int j = i; j < memberCount - 1; j++) {
+                                                    members[j] = members[j + 1];
+                                                }
+                                                members[memberCount - 1] = new String[5];
+                                                memberCount--;
                                                 foundMember = true;
                                                 System.out.println("      Member \"" + memberIdToDelete + "\" has been deleted successfully.");
                                                 break;
@@ -525,7 +530,7 @@ class coursework {
                                 char choiceSearchMember;
 
                                 do {
-                                    if (!members.isEmpty()) {
+                                    if (memberCount > 0) {
                                         clearConsole();
                                         System.out.println("///////////////////////////////// Search Member //////////////////////////////////////");
                                         System.out.println();
@@ -535,8 +540,8 @@ class coursework {
 
                                         boolean foundMember = false;
 
-                                        for (int i = 0; i < members.size(); i++) {
-                                            String[] member = members.get(i);
+                                        for (int i = 0; i < memberCount; i++) {
+                                            String[] member = members[i];
 
                                             // Assuming book[0] = ID, book[1] = Name, book[2] = Author, book[3] = Publisher, book[4] = Quantity
                                             if (member[0].equalsIgnoreCase(memberIdToSearch)) {
@@ -567,15 +572,15 @@ class coursework {
                                 } while (choiceSearchMember == 'Y');
                             } else if (memberMenuId == 5) {
                                 clearConsole();
-                                if (!members.isEmpty()) {
+                                if (memberCount > 0) {
                                     clearConsole();
                                     System.out.println("///////////////////////////////// View All Members //////////////////////////////////////");
                                     System.out.println();
                                     System.out.printf("%-5s %-10s %-25s %-20s %-30s\n", "No.", "ID", "Name", "Contact Number", "Email");
                                     System.out.println("----------------------------------------------------------------------------------------------");
 
-                                    for (int i = 0; i < members.size(); i++) {
-                                        String[] member = members.get(i);
+                                    for (int i = 0; i < memberCount; i++) {
+                                        String[] member = members[i];
 
                                         System.out.printf("%-5d %-10s %-25s %-20s %-30s\n", 
                                             (i + 1), member[0], member[1], member[2], member[3]);
@@ -583,10 +588,11 @@ class coursework {
                                     
                                     System.out.println("----------------------------------------------------------------------------------------------");
                                     System.out.println();
-                                    System.out.println("      Total Members: " + members.size());
+                                    System.out.println("      Total Members: " + memberCount);
                                     System.out.println();
                                     System.out.println("\nPress Enter to continue...");
                                     input.nextLine();
+                                    clearConsole();
                                     menuid = 2;
                                     memberMenu = true;
                                     break;
