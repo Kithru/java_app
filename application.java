@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-class application {
+class coursework {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -597,8 +597,6 @@ class application {
                                 System.out.println("Invalid option. Please try again.");
                             }
                         }   
-
-
                     } else if (menuid == 3) {
                         clearConsole();
                         System.out.println("Issue Book");
