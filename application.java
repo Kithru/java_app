@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-class coursework {
+class application {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -541,11 +541,10 @@ class coursework {
                                                 foundMember = true;
                                                 System.out.println("      Member Found.");
                                                 System.out.println();
-                                                System.out.println("      ID        : " + member[0]);
-                                                System.out.println("      Name      : " + member[1]);
-                                                System.out.println("      Author    : " + member[2]); 
-                                                System.out.println("      Publisher : " + member[3]); 
-                                                System.out.println("      Quantity  : " + member[4]); 
+                                                System.out.println("      ID                : " + member[0]);
+                                                System.out.println("      Name              : " + member[1]);
+                                                System.out.println("      Contact Number    : " + member[2]); 
+                                                System.out.println("      Email             : " + member[3]); 
                                                 break;
                                             }
                                         }
@@ -568,17 +567,16 @@ class coursework {
                                 clearConsole();
                                 if (!members.isEmpty()) {
                                     clearConsole();
-                                    System.out.println("//////////////////////////////////// View All Members /////////////////////////////////////////");
+                                    System.out.println("///////////////////////////////// View All Members //////////////////////////////////////");
                                     System.out.println();
-                                    System.out.println();
-                                    System.out.printf("%-5s %-10s %-25s %-20s %-20s %-10s\n", "No.", "ID", "Name", "Author", "Publisher", "Quantity");
+                                    System.out.printf("%-5s %-10s %-25s %-20s %-30s\n", "No.", "ID", "Name", "Contact Number", "Email");
                                     System.out.println("----------------------------------------------------------------------------------------------");
-                                    
+
                                     for (int i = 0; i < members.size(); i++) {
                                         String[] member = members.get(i);
-                                        
-                                        System.out.printf("%-5d %-10s %-25s %-20s %-20s %-10s\n", 
-                                            (i + 1), member[0], member[1], member[2], member[3], member[4]);
+
+                                        System.out.printf("%-5d %-10s %-25s %-20s %-30s\n", 
+                                            (i + 1), member[0], member[1], member[2], member[3]);
                                     }
                                     
                                     System.out.println("----------------------------------------------------------------------------------------------");
