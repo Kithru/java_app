@@ -597,8 +597,6 @@ class application {
                                 System.out.println("Invalid option. Please try again.");
                             }
                         }   
-
-
                     } else if (menuid == 3) {
                         clearConsole();
                         System.out.println("Issue Book");
