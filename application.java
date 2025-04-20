@@ -10,11 +10,17 @@ class application {
         boolean islogin = true;
         boolean mainMenu = true; 
         boolean bookMenu = true;
+        boolean memberMenu = true;
         String bookName;  
         String bookAuthor; 
         String bookGenre; 
         String bookQuantity;
+        String memberName;  
+        String memberContactNumber; 
+        String memberEmail; 
+
         List<String[]> books = new ArrayList<>();
+        List<String[]> members = new ArrayList<>();
 
         while (islogin) { 
             String login;
@@ -335,20 +341,275 @@ class application {
                                 }
                         }    
                     } else if (menuid == 2) {
-                        clearConsole();
-                        System.out.println("Manage Members");
-                        input.nextLine(); 
+                        while (memberMenu) {
+                            clearConsole();
+                            System.out.println("///////////////////////////////// Manage Members //////////////////////////////////////");
+                            System.out.println();
+                            System.out.println("        1. Add Member");
+                            System.out.println("        2. Update Member");
+                            System.out.println("        3. Delete Member");
+                            System.out.println("        4. Search Member");
+                            System.out.println("        5. View All Members");
+                            System.out.println("        6. Return to The Menu");
+                            System.out.println();
+                            System.out.print("        Please Enter Number to continue: ");
+                            
+                            int memberMenuId = input.nextInt();
+                            input.nextLine(); 
+                            if (memberMenuId == 1) {
+                                clearConsole();
+                                int memberCount = 0;
+                                char choiceMember;
+                                
+                                do {
+                                    int memberId = 1 + memberCount;
+                                    clearConsole();
+                                    System.out.println("///////////////////////////////// Add Member //////////////////////////////////////");
+                                    System.out.println();
+                                    System.out.print("     Please enter Name of the Member : ");
+                                    memberName = input.nextLine();
+                                    System.out.println();
+                                    System.out.print("     Please enter Contact Number : ");
+                                    memberContactNumber = input.nextLine();
+                                    System.out.println();
+                                    System.out.print("     Please enter Email of the Member : ");
+                                    memberEmail = input.nextLine();
+
+                                    boolean isDuplicate = false;
+                                    for (String[] member : members) {
+                                        if (member[1].equalsIgnoreCase(memberName) 
+                                            || member[2].equalsIgnoreCase(memberContactNumber)
+                                            || member[3].equalsIgnoreCase(memberEmail) )
+                                            // || book[4].equals(bookQuantity)) 
+                                            {
+                                            isDuplicate = true;
+                                            break;
+                                        }
+                                    }
+                                    if (isDuplicate) {
+                                        System.out.println();
+                                        System.out.println("\n    This book already exists in the system. Duplicate not added.");
+                                        System.out.println();
+                                    } else {
+
+                                        books.add(new String[] {
+                                            String.valueOf(memberId), memberName, memberContactNumber, memberEmail
+                                        });
+                                        System.out.println();
+                                        System.out.println("\n           Book Added Successfully.");
+                                        System.out.println();
+
+                                        System.out.println("Full Book List (for Testing):");
+                                        for (String[] book : books) {
+                                            System.out.println(Arrays.toString(book));
+                                        }
+                                        memberCount++;
+                                    }
+                                    System.out.print("\nDo you want to add another book? (Y/N): ");
+                                    choiceMember = input.nextLine().toUpperCase().charAt(0);
+                                
+                                } while (choiceMember == 'Y' );
+
+                                // input.close();
+                            } else if (memberMenuId == 2) {
+                                
+                                char choiceUpdateMember;
+
+                                do {
+                                    for (String[] member : members) {
+                                        System.out.println(Arrays.toString(member));
+                                    }
+
+                                    if (!members.isEmpty()) {
+                                        clearConsole();
+                                        System.out.println("///////////////////////////////// Update Member //////////////////////////////////////");
+                                        System.out.println();
+
+                                        System.out.print("     Please enter ID of the Member to update: ");
+                                        String memberIdToUpdate = input.nextLine();
+                                        System.out.println();
+
+                                        boolean found = false;
+
+                                        for (int i = 0; i < members.size(); i++) {
+                                            String[] member = members.get(i);
+
+                                            if (member[0].equalsIgnoreCase(memberIdToUpdate)) {
+                                                System.out.print("     Please enter new Name of the Member: ");
+                                                memberName = input.nextLine();
+                                                System.out.println();
+
+                                                System.out.print("     Please enter new Contact Number: ");
+                                                memberContactNumber = input.nextLine();
+                                                System.out.println();
+
+                                                System.out.print("     Please enter new Email of the Member: ");
+                                                memberEmail = input.nextLine();
+                                                System.out.println();
+
+                                                // Update member details
+                                                member[1] = memberName;
+                                                member[2] = memberContactNumber;
+                                                member[3] = memberEmail;
+
+                                                members.set(i, member);
+                                                found = true;
+
+                                                System.out.println();
+                                                System.out.println("            Member details updated successfully!");
+                                                System.out.println();
+                                                break;
+                                            }
+                                        }
+
+                                        if (!found) {
+                                            System.out.println("      Member not found in the list.");
+                                        }
+
+                                        System.out.print("\nDo you want to update another member? (Y/N): ");
+                                        choiceUpdateMember = input.nextLine().toUpperCase().charAt(0);
+                                        System.out.println();
+
+                                    } else {
+                                        System.out.println("No members found to update.");
+                                        input.nextLine();
+                                        break;
+                                    }
+
+                                } while (choiceUpdateMember == 'Y');
+
+                            } else if (memberMenuId == 3) {
+                                char choiceDeleteMember;
+                                do {
+                                    if (!members.isEmpty()) {
+                                        clearConsole();
+                                        System.out.println("///////////////////////////////// Delete Member //////////////////////////////////////");
+                                        System.out.println();
+                                        System.out.print("     Please enter ID of the Member to Delete: ");
+                                        String memberIdToDelete = input.nextLine();  
+                                        System.out.println();
+
+                                        boolean foundMember = false;
+
+                                        for (int i = 0; i < members.size(); i++) {
+                                            String[] member = members.get(i);
+
+                                            if (member[0].equalsIgnoreCase(memberIdToDelete)) {
+                                                members.remove(i);
+                                                foundMember = true;
+                                                System.out.println("      Member \"" + memberIdToDelete + "\" has been deleted successfully.");
+                                                break;
+                                            }
+                                        }
+
+                                        if (!foundMember) {
+                                            System.out.println("      Member not found in the list to Delete.");
+                                        }
+
+                                        System.out.print("\nDo you want to delete another member? (Y/N): ");
+                                        choiceDeleteMember = input.nextLine().toUpperCase().charAt(0);
+                                        System.out.println();
+
+                                    } else {
+                                        System.out.println("No members found to Delete.");
+                                        input.nextLine();
+                                        break; 
+                                    }
+                                } while (choiceDeleteMember == 'Y');
+
+                            } else if (memberMenuId == 4) {
+                                char choiceSearchMember;
+
+                                do {
+                                    if (!members.isEmpty()) {
+                                        clearConsole();
+                                        System.out.println("///////////////////////////////// Search Member //////////////////////////////////////");
+                                        System.out.println();
+                                        System.out.print("      Please enter Member ID for Search: ");
+                                        String memberIdToSearch = input.nextLine();  
+                                        System.out.println();
+
+                                        boolean foundMember = false;
+
+                                        for (int i = 0; i < members.size(); i++) {
+                                            String[] member = members.get(i);
+
+                                            // Assuming book[0] = ID, book[1] = Name, book[2] = Author, book[3] = Publisher, book[4] = Quantity
+                                            if (member[0].equalsIgnoreCase(memberIdToSearch)) {
+                                                foundMember = true;
+                                                System.out.println("      Member Found.");
+                                                System.out.println();
+                                                System.out.println("      ID        : " + member[0]);
+                                                System.out.println("      Name      : " + member[1]);
+                                                System.out.println("      Author    : " + member[2]); 
+                                                System.out.println("      Publisher : " + member[3]); 
+                                                System.out.println("      Quantity  : " + member[4]); 
+                                                break;
+                                            }
+                                        }
+
+                                        if (!foundMember) {
+                                            System.out.println("      Member not found in the list.");
+                                        }
+
+                                        System.out.print("\nDo you want to search another member? (Y/N): ");
+                                        choiceSearchMember = input.nextLine().toUpperCase().charAt(0);
+                                        System.out.println();
+
+                                    } else {
+                                        System.out.println("No members found.");
+                                        input.nextLine();
+                                        break;
+                                    }
+                                } while (choiceSearchMember == 'Y');
+                            } else if (memberMenuId == 5) {
+                                clearConsole();
+                                if (!members.isEmpty()) {
+                                    clearConsole();
+                                    System.out.println("//////////////////////////////////// View All Members /////////////////////////////////////////");
+                                    System.out.println();
+                                    System.out.println();
+                                    System.out.printf("%-5s %-10s %-25s %-20s %-20s %-10s\n", "No.", "ID", "Name", "Author", "Publisher", "Quantity");
+                                    System.out.println("----------------------------------------------------------------------------------------------");
+                                    
+                                    for (int i = 0; i < members.size(); i++) {
+                                        String[] member = members.get(i);
+                                        
+                                        System.out.printf("%-5d %-10s %-25s %-20s %-20s %-10s\n", 
+                                            (i + 1), member[0], member[1], member[2], member[3], member[4]);
+                                    }
+                                    
+                                    System.out.println("----------------------------------------------------------------------------------------------");
+                                    System.out.println();
+                                    System.out.println("      Total Members: " + members.size());
+                                    System.out.println();
+                                    System.out.println("\nPress Enter to continue...");
+                                    input.nextLine();
+                                    break;
+                                } else {
+                                    System.out.println("No member found.");
+                                    input.nextLine();
+                                }
+                            } else if (memberMenuId == 6) {
+                                clearConsole();
+                                mainMenu = true;
+                            } else {
+                                System.out.println("Invalid option. Please try again.");
+                            }
+                        }   
+
+
                     } else if (menuid == 3) {
                         clearConsole();
-                        System.out.println("Manage Members");
+                        System.out.println("Issue Book");
                         input.nextLine(); 
                     } else if (menuid == 4) {
                         clearConsole();            
-                        System.out.println("Manage Members");
+                        System.out.println("Return Book");
                         input.nextLine(); 
                     } else if (menuid == 5) {
                         clearConsole();
-                        System.out.println("Manage Members");
+                        System.out.println("View Reports");
                         input.nextLine(); 
                     } else if (menuid == 6) {
                         clearConsole();
