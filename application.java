@@ -1,6 +1,7 @@
-// import java.util.ArrayList;
+
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Calendar;
 import java.util.Scanner;
 
 class application {
@@ -15,6 +16,7 @@ class application {
         String password01 = "1234";
         int bookCount = 0;
         int memberCount = 0;
+        int issuedCount = 0;
         String bookName;  
         String bookAuthor; 
         String bookGenre; 
@@ -24,7 +26,8 @@ class application {
         String memberEmail; 
 
         String[][] books = new String[2][5];
-        String[][] members = new String[2][5];
+        String[][] members = new String[2][4];
+        String[][] issuedBooks = new String[2][4];
 
         while (islogin) { 
             String login;
@@ -75,11 +78,12 @@ class application {
                     System.out.println("        5. View Reports");
                     System.out.println("        6. Logout");
                     System.out.println();
-                    System.out.print("        Please Enter Number to continue: ");
+                    System.out.print("        Please Enter Number to continue : ");
                     
                     int menuid = input.nextInt();
+                    // String userInput = input.nextLine().trim();
+                    // int menuid = Integer.parseInt(userInput);
                     input.nextLine(); 
-
                     if (menuid == 1) {
                         while (bookMenu) {
                                 clearConsole();
@@ -94,8 +98,16 @@ class application {
                                 System.out.println();
                                 System.out.print("        Please Enter Number to continue: ");
                                 
-                                int bookMenuId = input.nextInt();
+                                String inputId = input.nextLine().trim();
+                                int bookMenuId = Integer.parseInt(inputId);
                                 input.nextLine(); 
+
+                                if (inputId.isEmpty()) {
+                                    System.out.println("        Input cannot be empty. Please enter a number.");
+                                    mainMenu = true;
+                                    break;
+                                }
+
                                 if (bookMenuId == 1) {
                                     clearConsole();
                                     char choice;
@@ -608,9 +620,72 @@ class application {
                             }
                         }   
                     } else if (menuid == 3) {
-                        clearConsole();
-                        System.out.println("Issue Book");
-                        input.nextLine(); 
+                        char choiceIssueBook;
+                        do {
+                            clearConsole();
+                            System.out.println("///////////////////////////////// Issue Book //////////////////////////////////////");
+                            System.out.println();
+
+                            System.out.print("      Please enter Member ID for Issue Book: ");
+                            String memberIdToIssueBook = input.nextLine().trim();
+                            System.out.println();
+
+                            boolean issueMember = false;
+                            for (int i = 0; i < memberCount; i++) {
+                                if (members[i][0].equalsIgnoreCase(memberIdToIssueBook)) {
+                                    issueMember = true;
+                                    break;
+                                }
+                            }
+
+                            if (!issueMember) {
+                                System.out.println("      Member not found in the list to Issue Book.");
+                            } else {
+                                System.out.print("      Please enter Book ID for Issue Book: ");
+                                String bookIdToIssueBook = input.nextLine().trim();
+                                System.out.println();
+
+                                boolean issueBook = false;
+                                for (int i = 0; i < bookCount; i++) {
+                                    if (books[i][0].equalsIgnoreCase(bookIdToIssueBook)) {
+                                        issueBook = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!issueBook) {
+                                    System.out.println("      Book not found in the list to Issue Book.");
+                                } else {
+                                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+                                    Date now = new Date(); // current date
+                                    String issueDate = formatter.format(now);
+
+                                    Calendar cal = Calendar.getInstance();
+                                    cal.setTime(now);
+                                    cal.add(Calendar.DAY_OF_MONTH, 14);
+                                    String dueDate = formatter.format(cal.getTime());
+
+                                    issuedBooks[issuedCount][0] = memberIdToIssueBook;
+                                    issuedBooks[issuedCount][1] = bookIdToIssueBook;
+                                    issuedBooks[issuedCount][2] = issueDate.toString();
+                                    issuedBooks[issuedCount][3] = dueDate.toString();
+                                    issuedCount++;
+
+                                    System.out.println("    Book successfully issued!");
+                                    System.out.println("      Issue Date: " + issueDate);
+                                    System.out.println("      Due Date: " + dueDate);
+                                    System.out.println();
+                                }
+                            }
+
+                            System.out.print("Do you want to issue another Book? (Y/N): ");
+                            choiceIssueBook = input.nextLine().toUpperCase().charAt(0);
+                            System.out.println();
+
+                        } while (choiceIssueBook == 'Y');
+
+                        
                     } else if (menuid == 4) {
                         clearConsole();            
                         System.out.println("Return Book");
@@ -625,23 +700,28 @@ class application {
                         islogin = true; 
                         // input.nextLine(); 
                     } else {
-                        System.out.println("Invalid option. Please try again.");
+                        clearConsole();
+                        System.out.println("            Invalid option. Please try again.");
+                        System.out.println();
+                        System.out.println("            Press Enter to return main menu.");
+                        System.out.println();
+                        input.nextLine(); 
                     }
                 }  
             }
         }   
     }
 
-    public static String[][] resizeArray(String[][] oldArray) {
-        int newSize = oldArray.length * 2;
-        String[][] newArray = new String[newSize][5];
+    // public static String[][] resizeArray(String[][] oldArray) {
+    //     int newSize = oldArray.length * 2;
+    //     String[][] newArray = new String[newSize][5];
 
-        for (int i = 0; i < oldArray.length; i++) {
-            newArray[i] = oldArray[i];
-        }
+    //     for (int i = 0; i < oldArray.length; i++) {
+    //         newArray[i] = oldArray[i];
+    //     }
 
-        return newArray;
-    }
+    //     return newArray;
+    // }
 
     private final static void clearConsole() {
         final String os = System.getProperty("os.name");
