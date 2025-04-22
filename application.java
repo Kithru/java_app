@@ -82,6 +82,7 @@ class application {
                     // int menuid = Integer.parseInt(userInput);
                     input.nextLine(); 
                     if (menuid == 1) {
+                        bookMenu = true;
                         while (bookMenu) {
                                 clearConsole();
                                 System.out.println("///////////////////////////////// Manage Books //////////////////////////////////////");
@@ -97,7 +98,7 @@ class application {
                                 
                                 String inputId = input.nextLine().trim();
                                 int bookMenuId = Integer.parseInt(inputId);
-                                input.nextLine(); 
+                                // input.nextLine(); 
 
                                 if (inputId.isEmpty()) {
                                     System.out.println("        Input cannot be empty. Please enter a number.");
@@ -351,8 +352,13 @@ class application {
 
                                 } else if (bookMenuId == 6) {
                                     clearConsole();
-                                    mainMenu = true;
+                                    mainMenu = true; 
+                                    // islogin = false; 
+                                    // login = "success";
+                                    bookMenu = false;
+                                    break;
                                 } else {
+                                    System.out.println();
                                     System.out.println("Invalid option. Please try again.");
                                 }
                         }    
@@ -614,7 +620,11 @@ class application {
                                 }
                             } else if (memberMenuId == 6) {
                                 clearConsole();
-                                mainMenu = true;
+                                mainMenu = true; 
+                                    // islogin = false; 
+                                    // login = "success";
+                                bookMenu = false;
+                                break;
                             } else {
                                 System.out.println();
                                 System.out.println("Invalid option. Please try again.");
