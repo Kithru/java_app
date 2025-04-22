@@ -1,8 +1,4 @@
-
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 class application {
@@ -157,10 +153,10 @@ class application {
                                             System.out.println("\n           Book Added Successfully.");
                                             System.out.println();
 
-                                            System.out.println("Full Book List (for Testing):");
-                                            for (String[] book : books) {
-                                                System.out.println(Arrays.toString(book));
-                                            }
+                                            // System.out.println("Full Book List (for Testing):");
+                                            // for (String[] book : books) {
+                                            //     System.out.println(Arrays.toString(book));
+                                            // }
                                             bookCount++;
                                         }
                                         System.out.print("\nDo you want to add another book? (Y/N): ");
@@ -174,9 +170,9 @@ class application {
 
                                     do {
                                         if (bookCount > 0) {
-                                            for (int i = 0; i < bookCount; i++) {
-                                                System.out.println(Arrays.toString(books[i]));
-                                            }
+                                            // for (int i = 0; i < bookCount; i++) {
+                                            //     System.out.println(Arrays.toString(books[i]));
+                                            // }
 
                                             clearConsole();
                                             System.out.println("///////////////////////////////// Update Book //////////////////////////////////////");
@@ -423,10 +419,10 @@ class application {
                                         System.out.println("\n           Member Added Successfully.");
                                         System.out.println();
 
-                                        System.out.println("Full Book List (for Testing):");
-                                        for (String[] member : members) {
-                                            System.out.println(Arrays.toString(member));
-                                        }
+                                        // System.out.println("Full Book List (for Testing):");
+                                        // for (String[] member : members) {
+                                        //     System.out.println(Arrays.toString(member));
+                                        // }
                                         memberCount++;
                                     }
                                     System.out.print("\nDo you want to add another book? (Y/N): ");
@@ -440,9 +436,9 @@ class application {
                                 char choiceUpdateMember;
 
                                 do {
-                                    for (String[] member : members) {
-                                        System.out.println(Arrays.toString(member));
-                                    }
+                                    // for (String[] member : members) {
+                                    //     System.out.println(Arrays.toString(member));
+                                    // }
 
                                     if (memberCount > 0) { 
                                         clearConsole();
@@ -669,15 +665,10 @@ class application {
                                     System.out.println();
                                     input.nextLine();
                                 } else {
-                                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                                    
 
-                                    Date now = new Date(); // current date
-                                    String issueDate = formatter.format(now);
-
-                                    Calendar cal = Calendar.getInstance();
-                                    cal.setTime(now);
-                                    cal.add(Calendar.DAY_OF_MONTH, 14);
-                                    String dueDate = formatter.format(cal.getTime());
+                                    LocalDate issueDate = LocalDate.now(); 
+                                    LocalDate dueDate   = issueDate.plusDays(14); 
 
                                     issuedBooks[issuedCount][0] = memberIdToIssueBook;
                                     issuedBooks[issuedCount][1] = bookIdToIssueBook;
