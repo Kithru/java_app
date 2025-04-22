@@ -2,6 +2,7 @@
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 class application {
@@ -261,6 +262,7 @@ class application {
 
                                             if (!found) {
                                                 System.out.println("      Book not found in the list to Delete.");
+                                                System.out.println();
                                             }
 
                                             System.out.print("\nDo you want to delete another book? (Y/N): ");
@@ -307,6 +309,7 @@ class application {
 
                                             if (!found) {
                                                 System.out.println("      Book not found in the list.");
+                                                System.out.println();
                                             }
 
                                             System.out.print("\nDo you want to search another book? (Y/N): ");
@@ -467,7 +470,6 @@ class application {
                                                 memberEmail = input.nextLine();
                                                 System.out.println();
 
-                                                // Update member details
                                                 members[i][1] = memberName;
                                                 members[i][2] = memberContactNumber;
                                                 members[i][3] = memberEmail;
@@ -482,6 +484,7 @@ class application {
 
                                         if (!found) {
                                             System.out.println("      Member not found in the list.");
+                                            System.out.println();
                                         }
 
                                         System.out.print("\nDo you want to update another member? (Y/N): ");
@@ -525,6 +528,7 @@ class application {
 
                                         if (!foundMember) {
                                             System.out.println("      Member not found in the list to Delete.");
+                                            System.out.println();
                                         }
 
                                         System.out.print("\nDo you want to delete another member? (Y/N): ");
@@ -621,6 +625,8 @@ class application {
                         }   
                     } else if (menuid == 3) {
                         char choiceIssueBook;
+                        boolean issueMember = false;
+                        boolean issueBook = false;
                         do {
                             clearConsole();
                             System.out.println("///////////////////////////////// Issue Book //////////////////////////////////////");
@@ -630,7 +636,6 @@ class application {
                             String memberIdToIssueBook = input.nextLine().trim();
                             System.out.println();
 
-                            boolean issueMember = false;
                             for (int i = 0; i < memberCount; i++) {
                                 if (members[i][0].equalsIgnoreCase(memberIdToIssueBook)) {
                                     issueMember = true;
@@ -640,12 +645,16 @@ class application {
 
                             if (!issueMember) {
                                 System.out.println("      Member not found in the list to Issue Book.");
+                                System.out.println();
+                                System.out.println("               Press Enter to continue.");
+                                System.out.println();
+                                input.nextLine();
+                                clearConsole(); 
                             } else {
                                 System.out.print("      Please enter Book ID for Issue Book: ");
                                 String bookIdToIssueBook = input.nextLine().trim();
                                 System.out.println();
 
-                                boolean issueBook = false;
                                 for (int i = 0; i < bookCount; i++) {
                                     if (books[i][0].equalsIgnoreCase(bookIdToIssueBook)) {
                                         issueBook = true;
@@ -655,6 +664,10 @@ class application {
 
                                 if (!issueBook) {
                                     System.out.println("      Book not found in the list to Issue Book.");
+                                    System.out.println();
+                                    System.out.println("               Press Enter to continue.");
+                                    System.out.println();
+                                    input.nextLine();
                                 } else {
                                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -678,10 +691,14 @@ class application {
                                     System.out.println();
                                 }
                             }
-
-                            System.out.print("Do you want to issue another Book? (Y/N): ");
-                            choiceIssueBook = input.nextLine().toUpperCase().charAt(0);
-                            System.out.println();
+                            if (issueMember && issueBook && (issuedCount > 0))  {
+                                System.out.print("Do you want to issue another Book? (Y/N): ");
+                                choiceIssueBook = input.nextLine().toUpperCase().charAt(0);
+                                System.out.println();
+                            } else {
+                                mainMenu = true;
+                                break;
+                            }
 
                         } while (choiceIssueBook == 'Y');
 
