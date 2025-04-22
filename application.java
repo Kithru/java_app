@@ -616,11 +616,13 @@ class application {
                                 clearConsole();
                                 mainMenu = true;
                             } else {
+                                System.out.println();
                                 System.out.println("Invalid option. Please try again.");
+                                input.nextLine();
                             }
                         }   
                     } else if (menuid == 3) {
-                        char choiceIssueBook;
+                        char choiceIssueBook = 'N';
                         boolean issueMember = false;
                         boolean issueBook = false;
                         do {
@@ -651,48 +653,60 @@ class application {
                                 String bookIdToIssueBook = input.nextLine().trim();
                                 System.out.println();
 
+                                int bookIndex = -1;
                                 for (int i = 0; i < bookCount; i++) {
                                     if (books[i][0].equalsIgnoreCase(bookIdToIssueBook)) {
-                                        issueBook = true;
+                                        bookIndex = i;
+                                        int qty = Integer.parseInt(books[i][4]);     
+                                        if (qty > 0) {
+                                            issueBook = true;
+                                        }
                                         break;
                                     }
                                 }
 
-                                if (!issueBook) {
-                                    System.out.println("      Book not found in the list to Issue Book.");
+                                    if (!issueBook) {
+                                        if (bookIndex >= 0) {
+                                            System.out.println("      Sorry, that book is currently out of stock.");
+                                            System.out.println();
+                                        } else {
+                                            System.out.println("      Book not found in the list to Issue Book.");
+                                            System.out.println();
+                                        }
+                                        System.out.println("\n               Press Enter to continue.\n");
+                                        input.nextLine();
+                                        // continue;
+                                    } else {
+
+                                        int currentQty = Integer.parseInt(books[bookIndex][4]);
+                                        books[bookIndex][4] = String.valueOf(currentQty - 1);
+
+                                        LocalDate issueDate = LocalDate.now(); 
+                                        LocalDate dueDate   = issueDate.plusDays(14); 
+
+                                        issuedBooks[issuedCount][0] = memberIdToIssueBook;
+                                        issuedBooks[issuedCount][1] = bookIdToIssueBook;
+                                        issuedBooks[issuedCount][2] = issueDate.toString();
+                                        issuedBooks[issuedCount][3] = dueDate.toString();
+                                        issuedCount++;
+
+                                        System.out.println("    Book successfully issued!");
+                                        System.out.println("      Issue Date: " + issueDate);
+                                        System.out.println("      Due Date: " + dueDate);
+                                        System.out.println();
+                                    }
+                        
+                                if (issueMember && issueBook && (issuedCount > 0))  {
+                                    System.out.print("Do you want to issue another Book? (Y/N): ");
+                                    choiceIssueBook = input.nextLine().toUpperCase().charAt(0);
                                     System.out.println();
-                                    System.out.println("               Press Enter to continue.");
-                                    System.out.println();
-                                    input.nextLine();
                                 } else {
-                                    
-
-                                    LocalDate issueDate = LocalDate.now(); 
-                                    LocalDate dueDate   = issueDate.plusDays(14); 
-
-                                    issuedBooks[issuedCount][0] = memberIdToIssueBook;
-                                    issuedBooks[issuedCount][1] = bookIdToIssueBook;
-                                    issuedBooks[issuedCount][2] = issueDate.toString();
-                                    issuedBooks[issuedCount][3] = dueDate.toString();
-                                    issuedCount++;
-
-                                    System.out.println("    Book successfully issued!");
-                                    System.out.println("      Issue Date: " + issueDate);
-                                    System.out.println("      Due Date: " + dueDate);
-                                    System.out.println();
+                                    mainMenu = true;
+                                    break;
                                 }
                             }
-                            if (issueMember && issueBook && (issuedCount > 0))  {
-                                System.out.print("Do you want to issue another Book? (Y/N): ");
-                                choiceIssueBook = input.nextLine().toUpperCase().charAt(0);
-                                System.out.println();
-                            } else {
-                                mainMenu = true;
-                                break;
-                            }
-
                         } while (choiceIssueBook == 'Y');
-
+                    
                         
                     } else if (menuid == 4) {
                         clearConsole();            
