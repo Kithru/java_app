@@ -692,7 +692,11 @@ class application {
                                         books[bookIndex][4] = String.valueOf(currentQty - 1);
 
                                         LocalDate issueDate = LocalDate.now(); 
-                                        LocalDate dueDate   = issueDate.plusDays(14); 
+                                        // LocalDate dueDate   = issueDate.plusDays(14); 
+                                        System.out.print("      Please enter due dates by Numbers: ");
+                                        String dDate = input.nextLine().trim();
+                                        String dueDate = issueDate + dDate;
+                                        System.out.println();
 
                                         issuedBooks[issuedCount][0] = memberIdToIssueBook;
                                         issuedBooks[issuedCount][1] = bookIdToIssueBook;
