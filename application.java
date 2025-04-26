@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.util.Scanner;
 
-class application {
+class coursework {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -633,12 +633,13 @@ class application {
                         }   
                     } else if (menuid == 3) {
                         char choiceIssueBook = 'N';
-                        boolean issueMember = false;
-                        boolean issueBook = false;
                         do {
                             clearConsole();
                             System.out.println("///////////////////////////////// Issue Book //////////////////////////////////////");
                             System.out.println();
+
+                            boolean issueMember = false;
+                            boolean issueBook = false;
 
                             System.out.print("      Please enter Member ID for Issue Book: ");
                             String memberIdToIssueBook = input.nextLine().trim();
@@ -657,70 +658,66 @@ class application {
                                 System.out.println("               Press Enter to continue.");
                                 System.out.println();
                                 input.nextLine();
-                                clearConsole(); 
-                            } else {
-                                System.out.print("      Please enter Book ID for Issue Book: ");
-                                String bookIdToIssueBook = input.nextLine().trim();
-                                System.out.println();
+                                continue;
+                            } 
 
-                                int bookIndex = -1;
-                                for (int i = 0; i < bookCount; i++) {
-                                    if (books[i][0].equalsIgnoreCase(bookIdToIssueBook)) {
-                                        bookIndex = i;
-                                        int qty = Integer.parseInt(books[i][4]);     
-                                        if (qty > 0) {
-                                            issueBook = true;
-                                        }
-                                        break;
+                            System.out.print("      Please enter Book ID for Issue Book: ");
+                            String bookIdToIssueBook = input.nextLine().trim();
+                            System.out.println();
+
+                            int bookIndex = -1;
+                            for (int i = 0; i < bookCount; i++) {
+                                if (books[i][0].equalsIgnoreCase(bookIdToIssueBook)) {
+                                    bookIndex = i;
+                                    int qty = Integer.parseInt(books[i][4]);
+                                    if (qty > 0) {
+                                        issueBook = true;
                                     }
-                                }
-
-                                    if (!issueBook) {
-                                        if (bookIndex >= 0) {
-                                            System.out.println("      Sorry, that book is currently out of stock.");
-                                            System.out.println();
-                                        } else {
-                                            System.out.println("      Book not found in the list to Issue Book.");
-                                            System.out.println();
-                                        }
-                                        System.out.println("\n               Press Enter to continue.\n");
-                                        input.nextLine();
-                                        // continue;
-                                    } else {
-
-                                        int currentQty = Integer.parseInt(books[bookIndex][4]);
-                                        books[bookIndex][4] = String.valueOf(currentQty - 1);
-
-                                        LocalDate issueDate = LocalDate.now(); 
-                                        // LocalDate dueDate   = issueDate.plusDays(14); 
-                                        System.out.print("      Please enter due dates by Numbers: ");
-                                        String dDate = input.nextLine().trim();
-                                        String dueDate = issueDate + dDate;
-                                        System.out.println();
-
-                                        issuedBooks[issuedCount][0] = memberIdToIssueBook;
-                                        issuedBooks[issuedCount][1] = bookIdToIssueBook;
-                                        issuedBooks[issuedCount][2] = issueDate.toString();
-                                        issuedBooks[issuedCount][3] = dueDate.toString();
-                                        issuedCount++;
-
-                                        System.out.println("    Book successfully issued!");
-                                        System.out.println("      Issue Date: " + issueDate);
-                                        System.out.println("      Due Date: " + dueDate);
-                                        System.out.println();
-                                    }
-                        
-                                if (issueMember && issueBook && (issuedCount > 0))  {
-                                    System.out.print("Do you want to issue another Book? (Y/N): ");
-                                    choiceIssueBook = input.nextLine().toUpperCase().charAt(0);
-                                    System.out.println();
-                                } else {
-                                    mainMenu = true;
                                     break;
                                 }
                             }
+
+                            if (!issueBook) {
+                                if (bookIndex >= 0) {
+                                    System.out.println("      Sorry, that book is currently out of stock.");
+                                } else {
+                                    System.out.println("      Book not found in the list to Issue Book.");
+                                }
+                                System.out.println("\n               Press Enter to continue.\n");
+                                input.nextLine();
+                                continue; 
+                            } 
+                            int currentQty = Integer.parseInt(books[bookIndex][4]);
+                            books[bookIndex][4] = String.valueOf(currentQty - 1);
+
+                            LocalDate issueDate = LocalDate.now(); 
+                            System.out.print("      Please enter number of days until due date: ");
+                            String dDate = input.nextLine().trim();
+                            System.out.println();
+
+                            try {
+                                int daysToAdd = Integer.parseInt(dDate); 
+                                LocalDate dueDate = issueDate.plusDays(daysToAdd);
+
+                                issuedBooks[issuedCount][0] = memberIdToIssueBook;
+                                issuedBooks[issuedCount][1] = bookIdToIssueBook;
+                                issuedBooks[issuedCount][2] = issueDate.toString();
+                                issuedBooks[issuedCount][3] = dueDate.toString();
+                                issuedCount++;
+
+                                System.out.println("    Book successfully issued!");
+                                System.out.println("      Issue Date: " + issueDate);
+                                System.out.println("      Due Date: " + dueDate);
+                                System.out.println();
+                            } catch (NumberFormatException e) {
+                                System.out.println("      Invalid number entered for due date. Please try again.");
+                            }
+
+                            System.out.print("Do you want to issue another Book? (Y/N): ");
+                            choiceIssueBook = input.nextLine().toUpperCase().charAt(0);
+                            System.out.println();
+
                         } while (choiceIssueBook == 'Y');
-                    
                         
                     } else if (menuid == 4) {
                         clearConsole();            
