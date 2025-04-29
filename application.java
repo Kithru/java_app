@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
-class coursework {
+class application {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -806,8 +806,6 @@ class coursework {
                             System.out.println();
 
                         } while (choiceReturnBook == 'Y');
-
-
 
                     } else if (menuid == 5) {
                         clearConsole();
