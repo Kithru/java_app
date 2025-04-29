@@ -1,7 +1,8 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
-class application {
+class coursework {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -127,6 +128,7 @@ class application {
                                         System.out.print("     Please enter Quantity : ");
                                         bookQuantity = input.nextLine();
 
+                                        
                                         boolean isDuplicate = false;
                                         for (int i = 0; i < bookCount; i++) {
                                             String[] book = books[i];
@@ -720,9 +722,93 @@ class application {
                         } while (choiceIssueBook == 'Y');
                         
                     } else if (menuid == 4) {
-                        clearConsole();            
-                        System.out.println("Return Book");
-                        input.nextLine(); 
+                        char choiceReturnBook = 'N';
+                        do {
+                            clearConsole();
+                            System.out.println("/////////////////////////////// Return Book ///////////////////////////////");
+                            System.out.println();
+
+                            boolean foundMember = false;
+                            boolean foundIssued = false;
+
+                            System.out.print("      Please enter Member ID for Return Book: ");
+                            String memberIdToReturnBook = input.nextLine().trim();
+                            System.out.println();
+
+                            for (int i = 0; i < memberCount; i++) {
+                                if (members[i][0].equalsIgnoreCase(memberIdToReturnBook)) {
+                                    foundMember = true;
+                                    break;
+                                }
+                            }
+
+                            if (!foundMember) {
+                                System.out.println("      Invalid Member ID.");
+                                System.out.println();
+                                System.out.println("\n               Press Enter to continue.\n");
+                                input.nextLine();
+                                continue;
+                            }
+
+                            System.out.print("      Please enter Book ID for Return Book: ");
+                            String bookIdToReturnBook = input.nextLine().trim();
+                            System.out.println();
+
+                            int issuedIndex = -1;
+                            for (int i = 0; i < issuedCount; i++) {
+                                if (issuedBooks[i][0] != null &&
+                                    issuedBooks[i][0].equalsIgnoreCase(memberIdToReturnBook) &&
+                                    issuedBooks[i][1].equalsIgnoreCase(bookIdToReturnBook)) {
+                                    issuedIndex = i;
+                                    foundIssued = true;
+                                    break;
+                                }
+                            }
+
+                            if (!foundIssued) {
+                                System.out.println("      No record found for the given Member ID and Book ID.");
+                                System.out.println();
+                                System.out.println("\n               Press Enter to continue.\n");
+                                input.nextLine();
+                                continue;
+                            }
+                            
+                            LocalDate currentDate = LocalDate.now();
+                            String dueDateStr = issuedBooks[issuedIndex][3];
+                            LocalDate dueDate = LocalDate.parse(dueDateStr);
+                            long overdueDays = ChronoUnit.DAYS.between(dueDate, currentDate);
+
+                            int fine = 0;
+                            if (overdueDays > 0) {
+                                fine = (int) overdueDays * 50;
+                            }
+
+                            for (int i = 0; i < bookCount; i++) {
+                                if (books[i][0].equalsIgnoreCase(bookIdToReturnBook)) {
+                                    int qty = Integer.parseInt(books[i][4]);
+                                    books[i][4] = String.valueOf(qty + 1);
+                                    break;
+                                }
+                            }
+                            issuedBooks[issuedIndex][0] = null;
+                            issuedBooks[issuedIndex][1] = null;
+                            issuedBooks[issuedIndex][2] = null;
+                            issuedBooks[issuedIndex][3] = null;
+
+                            System.out.println("      Book returned successfully.");
+                            if (fine > 0) {
+                                System.out.println("      Overdue fine: " + fine + " LKR");
+                            }
+
+                            System.out.println();
+                            System.out.print("Do you want to return another Book? (Y/N): ");
+                            choiceReturnBook = input.nextLine().toUpperCase().charAt(0);
+                            System.out.println();
+
+                        } while (choiceReturnBook == 'Y');
+
+
+
                     } else if (menuid == 5) {
                         clearConsole();
                         System.out.println("View Reports");
@@ -744,17 +830,6 @@ class application {
             }
         }   
     }
-
-    // public static String[][] resizeArray(String[][] oldArray) {
-    //     int newSize = oldArray.length * 2;
-    //     String[][] newArray = new String[newSize][5];
-
-    //     for (int i = 0; i < oldArray.length; i++) {
-    //         newArray[i] = oldArray[i];
-    //     }
-
-    //     return newArray;
-    // }
 
     private final static void clearConsole() {
         final String os = System.getProperty("os.name");
