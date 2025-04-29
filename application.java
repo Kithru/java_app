@@ -808,7 +808,6 @@ class application {
                         } while (choiceReturnBook == 'Y');
 
 
-
                     } else if (menuid == 5) {
                         clearConsole();
                         System.out.println("View Reports");
