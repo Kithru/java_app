@@ -428,10 +428,6 @@ class application {
                                         System.out.println("\n           Member Added Successfully.");
                                         System.out.println();
 
-                                        // System.out.println("Full Book List (for Testing):");
-                                        // for (String[] member : members) {
-                                        //     System.out.println(Arrays.toString(member));
-                                        // }
                                         memberCount++;
                                     }
                                     System.out.print("\nDo you want to add another book? (Y/N): ");
