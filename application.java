@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
-class application {
+class coursework {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -428,10 +428,6 @@ class application {
                                         System.out.println("\n           Member Added Successfully.");
                                         System.out.println();
 
-                                        // System.out.println("Full Book List (for Testing):");
-                                        // for (String[] member : members) {
-                                        //     System.out.println(Arrays.toString(member));
-                                        // }
                                         memberCount++;
                                     }
                                     System.out.print("\nDo you want to add another book? (Y/N): ");
